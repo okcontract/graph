@@ -233,9 +233,7 @@ export class Graph<T extends NodeId> {
         : option.next;
     const starts = includeRoots
       ? roots
-      : roots
-          .flatMap((root) => nextNodes(root))
-          .filter((id) => !roots.includes(id));
+      : roots.flatMap((root) => nextNodes(root));
     let stack: T[] = [];
     let visited = new Map<T, boolean>();
     let recursionStack = new Map<T, boolean>();
