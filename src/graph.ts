@@ -53,8 +53,8 @@ export class Graph<T extends NodeId> {
   addEdge(node1: T, node2: T): void {
     this._check(node1);
     this._check(node2);
-    this._adjacencyList.get(node1)!.push(node2);
-    this._dependencies.get(node2)!.push(node1);
+    this._adjacencyList.get(node1)?.push(node2);
+    this._dependencies.get(node2)?.push(node1);
     // Invalidate the cache for the node and its dependencies
     this._invalidateCache(node1);
   }
@@ -62,13 +62,12 @@ export class Graph<T extends NodeId> {
   removeEdge(node1: T, node2: T): void {
     this._check(node1);
     this._check(node2);
-    const adjList = this._adjacencyList.get(node1)!;
+    const adjList = this._adjacencyList.get(node1) as T[];
     const adjIndex = adjList.indexOf(node2);
     if (adjIndex !== -1) {
       adjList.splice(adjIndex, 1);
     }
-
-    const deps = this._dependencies.get(node2)!;
+    const deps = this._dependencies.get(node2) as T[];
     const depsIndex = deps.indexOf(node1);
     if (depsIndex !== -1) {
       deps.splice(depsIndex, 1);
@@ -91,11 +90,11 @@ export class Graph<T extends NodeId> {
   }
 
   topologicalSort(): T[] | null {
-    let stack: T[] = [];
-    let visited = new Map<T, boolean>();
-    let recursionStack = new Map<T, boolean>();
+    const stack: T[] = [];
+    const visited = new Map<T, boolean>();
+    const recursionStack = new Map<T, boolean>();
 
-    for (let node of this._adjacencyList.keys()) {
+    for (const node of this._adjacencyList.keys()) {
       if (!visited.get(node)) {
         if (
           this._topologicalSortHelper(
@@ -103,7 +102,7 @@ export class Graph<T extends NodeId> {
             visited,
             recursionStack,
             stack,
-            (n) => this._adjacencyList.get(n)
+            (n) => this._adjacencyList.get(n) as T[]
           )
         ) {
           console.log("Cycle detected! Topological sort not possible.");
@@ -126,12 +125,12 @@ export class Graph<T extends NodeId> {
     option?: { next?: (node: T) => T[]; filter?: (a: T, b: T) => boolean }
   ): T[] | null {
     if (!this._cache.has(start)) {
-      let stack: T[] = [];
-      let visited = new Map<T, boolean>();
-      let recursionStack = new Map<T, boolean>();
+      const stack: T[] = [];
+      const visited = new Map<T, boolean>();
+      const recursionStack = new Map<T, boolean>();
       const nextNodes =
         option?.next === undefined
-          ? (n) => this._adjacencyList.get(n)
+          ? (n: T) => this._adjacencyList.get(n) as T[]
           : option.next;
 
       if (!visited.get(start)) {
@@ -173,9 +172,9 @@ export class Graph<T extends NodeId> {
     visited.set(node, true);
     recursionStack.set(node, true);
 
-    let neighbors = next(node);
+    const neighbors = next(node);
     if (neighbors) {
-      for (let nextNode of neighbors) {
+      for (const nextNode of neighbors) {
         if (
           (!option?.filter || option.filter(node, nextNode)) &&
           !visited.get(nextNode) &&
@@ -190,7 +189,8 @@ export class Graph<T extends NodeId> {
           !noFailOnLoop
         ) {
           return true;
-        } else if (recursionStack.get(nextNode) && !noFailOnLoop) {
+        }
+        if (recursionStack.get(nextNode) && !noFailOnLoop) {
           return true;
         }
       }
@@ -229,14 +229,14 @@ export class Graph<T extends NodeId> {
       option?.includeRoots === undefined ? true : option.includeRoots;
     const nextNodes =
       option?.next === undefined
-        ? (n) => this._adjacencyList.get(n)
+        ? (n: T) => this._adjacencyList.get(n) as T[]
         : option.next;
     const starts = includeRoots
       ? roots
       : roots.flatMap((root) => nextNodes(root));
-    let stack: T[] = [];
-    let visited = new Map<T, boolean>();
-    let recursionStack = new Map<T, boolean>();
+    const stack: T[] = [];
+    const visited = new Map<T, boolean>();
+    const recursionStack = new Map<T, boolean>();
     for (const start of starts) {
       if (
         !visited.get(start) &&
@@ -281,9 +281,9 @@ export class Graph<T extends NodeId> {
     }
   ): boolean {
     visited.set(node, true);
-    let neighbors = next(node);
+    const neighbors = next(node);
     if (neighbors) {
-      for (let nextNode of neighbors) {
+      for (const nextNode of neighbors) {
         if (!option?.filter || option.filter(node, nextNode)) {
           if (visited.get(nextNode)) {
             // node has already been seen
@@ -366,9 +366,9 @@ export class Graph<T extends NodeId> {
    * @returns array of reachable leaves.
    */
   reachableLeaves(roots: Iterable<T>): Set<T> {
-    let stack: T[] = [];
-    let visited = new Map<T, boolean>();
-    let recursionStack = new Map<T, boolean>();
+    const stack: T[] = [];
+    const visited = new Map<T, boolean>();
+    const recursionStack = new Map<T, boolean>();
     const starts = Array.from(roots).flatMap((root) => this.get(root) || []);
     for (const start of starts) {
       if (!stack.includes(start))
@@ -377,16 +377,16 @@ export class Graph<T extends NodeId> {
           visited,
           recursionStack,
           stack,
-          (n) => this._adjacencyList.get(n),
+          (n) => this._adjacencyList.get(n) as T[],
           {
-            noFailOnLoop: true,
+            noFailOnLoop: true
           }
         );
     }
 
     return new Set(
       stack.filter((node) => {
-        return this.get(node)!.length <= 0;
+        return (this.get(node) as T[]).length <= 0;
       })
     );
   }

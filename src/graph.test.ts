@@ -1,4 +1,4 @@
-import { test, expect, describe } from "vitest";
+import { describe, expect, test } from "vitest";
 
 import { Graph } from "./graph";
 
@@ -71,7 +71,7 @@ test("should return just the start node when it has no dependents", () => {
 });
 
 test("should return partial topological sort correctly for a set of root", () => {
-  let graph = new Graph<string>();
+  const graph = new Graph<string>();
   graph.addNode("a");
   graph.addNode("b");
   graph.addNode("c");
@@ -104,7 +104,7 @@ test("should return partial topological sort correctly for a set of root", () =>
 });
 
 test("should return reachable leaves for a set of root", () => {
-  let graph = new Graph<string>();
+  const graph = new Graph<string>();
   graph.addNode("a");
   graph.addNode("b");
   graph.addNode("c");
@@ -198,7 +198,7 @@ test("should invalidate cache when adding a new node and edge", () => {
 
 describe("Graph destroy method", () => {
   test("should remove the node and associated edges", () => {
-    let graph = new Graph<string>();
+    const graph = new Graph<string>();
     graph.addNode("a");
     graph.addNode("b");
     graph.addNode("c");
@@ -211,7 +211,7 @@ describe("Graph destroy method", () => {
   });
 
   test("should return the correct set of removed nodes", () => {
-    let graph = new Graph<string>();
+    const graph = new Graph<string>();
     graph.addNode("a");
     graph.addNode("b");
     graph.addNode("c");
@@ -229,7 +229,7 @@ describe("Graph destroy method", () => {
   });
 
   test("should handle removing a non-existing node", () => {
-    let graph = new Graph<string>();
+    const graph = new Graph<string>();
     graph.addNode("a");
     graph.addNode("b");
     graph.addNode("c");
@@ -243,7 +243,7 @@ describe("Graph destroy method", () => {
 });
 
 test("partialTopologicalSortRootsSet properly uses options", () => {
-  let graph = new Graph<string>();
+  const graph = new Graph<string>();
   graph.addNode("a");
   graph.addNode("b");
   graph.addNode("c");
@@ -264,36 +264,36 @@ test("partialTopologicalSortRootsSet properly uses options", () => {
 */
 
   let ts = graph.partialTopologicalSortRootsSet(["a", "b"], {
-    includeRoots: false,
+    includeRoots: false
   });
   expect(ts).toEqual(["d", "c", "e"]);
 
   ts = graph.partialTopologicalSortRootsSet(["a", "b"], {
-    includeRoots: true,
+    includeRoots: true
   });
   expect(ts).toEqual(["d", "c", "a", "e", "b"]);
 
   ts = graph.partialTopologicalSortRootsSet(["a", "b"], {
-    next: (id) => graph.predecessors(id),
+    next: (id) => graph.predecessors(id)
   });
   expect(ts).toEqual(["a", "b"]);
 
   ts = graph.partialTopologicalSortRootsSet(["g"], {
     next: (id) => graph.predecessors(id),
-    includeRoots: false,
+    includeRoots: false
   });
   expect(graph.predecessors("g")).toEqual(["f"]);
   expect(ts).toEqual(["f"]);
 
   ts = graph.partialTopologicalSortRootsSet(["d"], {
     next: (id) => graph.predecessors(id),
-    includeRoots: false,
+    includeRoots: false
   });
   expect(ts).toEqual(["a", "b", "c"]);
 });
 
 test("should return reachable properties for a set of root", () => {
-  let graph = new Graph<string>();
+  const graph = new Graph<string>();
   graph.addNode("a");
   graph.addNode("b");
   graph.addNode("c");
@@ -359,7 +359,7 @@ test("Cells bug", () => {
    b --
   */
   const ts = graph.partialTopologicalSortRootsSet(["m", "p", "mp"], {
-    includeRoots: false,
+    includeRoots: false
   });
   expect(ts).toEqual(["mp", "p"]);
 });
