@@ -28,7 +28,7 @@
     "build": "vite build",
     "test": "vitest run",
     "definitions": "tsc --project tsconfig.build.json",
-    "prepublishOnly": "npm test && npm run build && npm run definitions",
+    "prepublishOnly": "npm run check && npm test && npm run build && npm run definitions",
     "check": "npx @biomejs/biome check src",
     "format": "npx @biomejs/biome format src --write"
   },
