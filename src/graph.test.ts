@@ -338,3 +338,28 @@ test("should return reachable properties for a set of root", () => {
   ts = graph.strictlyReachableProperty(new Set(["a", "b"]), property);
   expect(ts).toEqual(new Set(["a"]));
 });
+
+test("Cells bug", () => {
+  const graph = new Graph<string>();
+  graph.addNode("a");
+  graph.addNode("b");
+  graph.addNode("m");
+  graph.addNode("p");
+  graph.addNode("mp");
+
+  graph.addEdge("a", "m");
+  graph.addEdge("b", "m");
+  graph.addEdge("m", "p");
+  graph.addEdge("p", "mp");
+  /*
+   a --
+       \
+         m --- p --- mp
+       /      
+   b --
+  */
+  const ts = graph.partialTopologicalSortRootsSet(["m", "p", "mp"], {
+    includeRoots: false,
+  });
+  expect(ts).toEqual(["mp", "p"]);
+});
