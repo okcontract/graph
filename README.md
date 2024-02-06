@@ -1,18 +1,16 @@
-# graph, a directed graph library
+# graph, a small directed graph library
 
 [![CI](https://github.com/okcontract/graph/actions/workflows/main.yml/badge.svg)](https://github.com/okcontract/graph/actions?query=branch%3Amain++)
 [![Coverage Status](https://coveralls.io/repos/github/okcontract/graph/badge.svg?branch=main)](https://coveralls.io/github/okcontract/graph?branch=main)
 [![size](https://deno.bundlejs.com/badge?q=@okcontract/graph)](https://bundlephobia.com/package/@okcontract/graph)
 
-Graph is a simple directed graph library written in TypeScript, that provides:
+Graph is a simple directed graph library with no runtime dependency written in
+TypeScript, that provides:
 
 - Ability to add and remove node and edges
 - (Partial) topological sort
 - Cache paths for cases with (much) more reads than writes
 - Export to graphviz `.dot` files
-
-This library has no dependencies and the build artifact is 3.6kB (1.41kB
-gzipped).
 
 # Walkthrough
 
