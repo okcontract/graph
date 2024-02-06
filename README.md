@@ -1,5 +1,9 @@
 # graph, a directed graph library
 
+[![CI](https://github.com/okcontract/graph/actions/workflows/main.yml/badge.svg)](https://github.com/okcontract/graph/actions?query=branch%3Amain++)
+[![Coverage Status](https://coveralls.io/repos/github/okcontract/graph/badge.svg?branch=main)](https://coveralls.io/github/okcontract/graph?branch=main)
+[![size](https://deno.bundlejs.com/badge?q=@okcontract/graph)](https://bundlephobia.com/package/@okcontract/graph)
+
 Graph is a simple directed graph library written in TypeScript, that provides:
 
 - Ability to add and remove node and edges
@@ -7,7 +11,8 @@ Graph is a simple directed graph library written in TypeScript, that provides:
 - Cache paths for cases with (much) more reads than writes
 - Export to graphviz `.dot` files
 
-This library has no dependencies and the build artifact is 3.6kB (1.41kB gzipped).
+This library has no dependencies and the build artifact is 3.6kB (1.41kB
+gzipped).
 
 # Walkthrough
 
@@ -41,17 +46,23 @@ console.log(
       string: "style=filled,fillcolor=aquamarine",
       number: "style=filled,fillcolor=gold",
       object: "style=filled,fillcolor=hotpink",
-    }
-  )
+    },
+  ),
 );
 ```
 
 # About
 
-`graph` is written by the team at [OKcontract](https://okcontract.com) and is released under the MIT license.
+`graph` is written by the team at [OKcontract](https://okcontract.com) and is
+released under the MIT license.
 
-We aim for ease of use and correction. Chasing down any bug is our top priority.
+We aim for ease of use and correction. Chasing down any bug is our top
+priority.
 
-Contributors are welcome, feel free to submit PRs directly for small changes. You can also reach out in our [Discord](https://discord.gg/Cun5aF7k) or contact us on [Twitter](https://x.com/okcontract) in advance for larger contributions.
+Contributors are welcome, feel free to submit PRs directly for small changes.
+You can also reach out in our [Discord](https://discord.gg/Cun5aF7k) or
+contact us on [Twitter](https://x.com/okcontract) in advance for larger
+contributions.
 
-This work is supported in part by a RFG grant from [Optimism](https://optimism.io).
+This work is supported in part by a RFG grant from
+[Optimism](https://optimism.io).
