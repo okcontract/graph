@@ -12,11 +12,7 @@
       "require": "./dist/graph.umd.cjs"
     }
   },
-  "files": [
-    "dist/",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["dist/", "README.md", "LICENSE"],
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
     "terser": "5.26.0",
@@ -30,7 +26,8 @@
     "definitions": "tsc --project tsconfig.build.json",
     "prepublishOnly": "npm run check && npm test && npm run build && npm run definitions",
     "check": "npx @biomejs/biome check src",
-    "format": "npx @biomejs/biome format src --write"
+    "format": "npx @biomejs/biome format src --write",
+    "formatReadme": "prettier README.md --prose-wrap always --print-width 78 -w"
   },
   "repository": {
     "type": "git",
