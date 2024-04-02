@@ -51,6 +51,7 @@ export class Graph<T extends NodeId> {
   }
 
   addEdge(node1: T, node2: T): void {
+    if (this._adjacencyList.get(node1)?.includes(node2)) return;
     this._check(node1);
     this._check(node2);
     this._adjacencyList.get(node1)?.push(node2);

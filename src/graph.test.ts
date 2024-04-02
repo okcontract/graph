@@ -17,6 +17,15 @@ test("should add edges correctly", () => {
   expect(graph.get("a")).toEqual(["b"]);
 });
 
+test("does not add the same edge twice", () => {
+  const graph = new Graph<string>();
+  graph.addNode("a");
+  graph.addNode("b");
+  graph.addEdge("a", "b");
+  graph.addEdge("a", "b");
+  expect(graph.get("a")).toEqual(["b"]);
+});
+
 test("should return topological sort correctly", () => {
   const graph = new Graph<string>();
   graph.addNode("a");
