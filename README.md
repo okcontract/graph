@@ -38,14 +38,14 @@ console.log(
     {
       string: ["a", "d"],
       number: ["b"],
-      object: ["c"],
+      object: ["c"]
     },
     {
       string: "style=filled,fillcolor=aquamarine",
       number: "style=filled,fillcolor=gold",
-      object: "style=filled,fillcolor=hotpink",
-    },
-  ),
+      object: "style=filled,fillcolor=hotpink"
+    }
+  )
 );
 ```
 
