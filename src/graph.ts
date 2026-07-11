@@ -436,6 +436,7 @@ export class Graph<T extends NodeId> {
 
     // Clear from cache
     this._cache.delete(node);
+    this._names.delete(node);
   }
 
   /**

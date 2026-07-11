@@ -249,6 +249,16 @@ describe("Graph destroy method", () => {
 
     expect(() => graph.delete("e")).toThrow("Unknown node: e");
   });
+
+  test("should remove the node name", () => {
+    const graph = new Graph<string>();
+    graph.addNode("a");
+    graph.bless("a", "Alpha");
+
+    graph.delete("a");
+
+    expect(graph.name("a")).toBeUndefined();
+  });
 });
 
 test("partialTopologicalSortRootsSet properly uses options", () => {
