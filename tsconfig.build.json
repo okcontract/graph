@@ -7,6 +7,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "dist",
+    "moduleResolution": "Bundler",
     "module": "ES2020",
     "target": "ES2020"
   }

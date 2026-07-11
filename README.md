@@ -64,3 +64,22 @@ contributions.
 
 This work is supported in part by a RFG grant from
 [Optimism](https://optimism.io).
+
+# Development
+
+Building and testing `graph` requires a system installation of
+[`bun`](https://bun.com). Bun is deliberately not included in the project's
+dependencies.
+
+```sh
+bun install --frozen-lockfile
+bun run test
+bun run build
+bun run definitions
+```
+
+[`biome`](https://biomejs.dev) is also deliberately not included as a project
+dependency. Install it as a system binary to run `bun run format` or
+`bun run check`. The standard `bun run build` script formats the source before
+bundling, so it also expects `biome` to be available on `PATH`; direct use of
+`bun build` does not require Biome.

@@ -1,1 +1,1 @@
-export { type NodeId, Graph, ReferencesLeft } from "./graph";
+export { Graph, type NodeId, ReferencesLeft } from "./graph";
