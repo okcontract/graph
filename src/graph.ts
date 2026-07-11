@@ -427,7 +427,7 @@ export class Graph<T extends NodeId> {
 
     // Remove from dependencies
     this._dependencies.delete(node);
-    this._dependencies.forEach((value, key) => {
+    this._dependencies.forEach((value) => {
       const index = value.indexOf(node);
       if (index !== -1) {
         value.splice(index, 1);
